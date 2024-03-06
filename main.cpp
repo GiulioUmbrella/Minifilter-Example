@@ -4,7 +4,7 @@
 
 
 /**
-*  A structure to the filter handle
+*  A structure for the filter handle
 */
 
 typedef struct _NULL_FILTER_DATA{
@@ -13,5 +13,15 @@ typedef struct _NULL_FILTER_DATA{
 } NULL_FILTER_DATA, *PNULL_FILTER_DATA;
 
 
-NULL_FILTER_DATA NullFilterData;
+/**
+* FilterRegistration provides information about the minifilter to the filter manager
+* Specifies the callback functions for the IRP packet types
+*/
+
+CONST FLT_REGISTRATION FilterRegistration = {
+
+}
+
+
+
 
