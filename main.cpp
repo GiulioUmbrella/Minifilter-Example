@@ -21,7 +21,5 @@ typedef struct _NULL_FILTER_DATA{
 CONST FLT_REGISTRATION FilterRegistration = {
 
 }
-
-
-
+NULL_FILTER_DATA NullFilterData;
 
