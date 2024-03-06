@@ -23,7 +23,7 @@ CONST FLT_REGISTRATION FilterRegistration = {
     FLT_REGISTRATION_VERSION,      //  Version
     0,                             //  Flags
     NULL,                          //  Context registration
-    g_callbacks,                   //  Operation callbacks
+    callbacks,                   //  Operation callbacks
     InstanceFilterUnloadCallback,  //  FilterUnload
     InstanceSetupCallback,         //  InstanceSetup
     InstanceQueryTeardownCallback, //  InstanceQueryTeardown
@@ -33,6 +33,27 @@ CONST FLT_REGISTRATION FilterRegistration = {
     NULL,                          //  GenerateDestinationFileName
     NULL                           //  NormalizeNameComponent
 }
+
+
+/**
+* Specify the callback functions for IRP case
+*
+* For the IRP packer IRP_MJ_CREATE we specify the PreOperationCreate
+*/
+
+CONST FLT_OPERATION_REGISTRATION callbacks[] =
+{
+    {
+        IRP_MJ_CREATE,
+        0,
+        PreOperationCreate,
+        0
+    },
+  
+    { IRP_MJ_OPERATION_END }
+};
+
+
 NULL_FILTER_DATA NullFilterData;
 
 NTSTATUS
