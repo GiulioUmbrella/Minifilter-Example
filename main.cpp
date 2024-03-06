@@ -19,7 +19,19 @@ typedef struct _NULL_FILTER_DATA{
 */
 
 CONST FLT_REGISTRATION FilterRegistration = {
-
+    sizeof(FLT_REGISTRATION),      //  Size
+    FLT_REGISTRATION_VERSION,      //  Version
+    0,                             //  Flags
+    NULL,                          //  Context registration
+    g_callbacks,                   //  Operation callbacks
+    InstanceFilterUnloadCallback,  //  FilterUnload
+    InstanceSetupCallback,         //  InstanceSetup
+    InstanceQueryTeardownCallback, //  InstanceQueryTeardown
+    NULL,                          //  InstanceTeardownStart
+    NULL,                          //  InstanceTeardownComplete
+    NULL,                          //  GenerateFileName
+    NULL,                          //  GenerateDestinationFileName
+    NULL                           //  NormalizeNameComponent
 }
 NULL_FILTER_DATA NullFilterData;
 
@@ -56,10 +68,18 @@ DriverEntry (
 
     UNREFERENCED_PARAMETER( RegistryPath );
 
+    //
+    // Register minifilter
+    //
+
     status = FltRegisterFilter(DriverObject,
                                &FilterRegistration,
                                &NullFilterData.FilterHandle);
 
+    //
+    // Start minifilter
+    //
+    
     status = FltStartFiltering( NullFilterData.FilterHandle)
 
 }
